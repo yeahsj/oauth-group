@@ -19,8 +19,9 @@ public class IautoPhoneLoginServiceTest extends IautoTest {
 		paramDTO.setClientId(configDTO.getPhoneClientId());
 		paramDTO.setClientSercet(configDTO.getPhoneClientSercet());
 		paramDTO.setGrantType("password");
-		paramDTO.setUsername("accountsync");
-		paramDTO.setPassword("suntec");
+		paramDTO.setUsername("zpf");
+		paramDTO.setPassword("111111");
+		paramDTO.setDeviceNo("h24ci19j2dh29bhf");
 		IautoHeaderDTO headerDTO = new IautoHeaderDTO();
 
 		IautoPhoneLoginService iautoDeviceLoginService = new IautoPhoneLoginService(

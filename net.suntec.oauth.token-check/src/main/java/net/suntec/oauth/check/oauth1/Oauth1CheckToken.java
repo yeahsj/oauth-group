@@ -47,6 +47,8 @@ public abstract class Oauth1CheckToken extends AbstractCheckToken implements
 				HttpEntity entity = response.getEntity();
 				resBody = EntityUtils.toString(entity);
 				logger.info("message: " + resBody);
+			} else {
+				resBody = "";
 			}
 			return resBody;
 		} catch (ClientProtocolException e) {

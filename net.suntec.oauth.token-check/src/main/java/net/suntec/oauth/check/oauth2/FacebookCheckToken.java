@@ -9,7 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FacebookCheckToken extends Oauth2CheckToken implements CheckToken {
-	static String FB_CK_URL = "https://graph.facebook.com/v2.2/me?access_token=%s";
+	static String FB_CK_URL = "https://%s/v2.2/me?access_token=%s";
+	String FB_API_URL = "graph.facebook.com";
 
 	public static void main(String[] args) {
 		Logger logger = LoggerFactory.getLogger(FacebookCheckToken.class);
@@ -39,12 +40,17 @@ public class FacebookCheckToken extends Oauth2CheckToken implements CheckToken {
 
 	@Override
 	public String getCheckURL(TokenInfo info) {
-		return String.format(FB_CK_URL, info.getAccessToken());
+		return String.format(FB_CK_URL, FB_API_URL, info.getAccessToken());
 	}
 
 	@Override
 	public Verb getCheckUrlVerb() {
 		return Verb.GET;
+	}
+
+	@Override
+	protected String getCheckNetWorkURL() {
+		return FB_API_URL;
 	}
 
 }

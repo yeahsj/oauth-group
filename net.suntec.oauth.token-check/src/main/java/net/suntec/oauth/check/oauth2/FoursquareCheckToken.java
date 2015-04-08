@@ -14,7 +14,8 @@ import org.slf4j.LoggerFactory;
 
 public class FoursquareCheckToken extends Oauth2CheckToken implements
 		CheckToken {
-	private static final String FOURS_CK_URL = "https://api.foursquare.com/v2/users/self?oauth_token=%s&v=%s";
+	static final String FOURS_CK_URL = "https://%s/v2/users/self?oauth_token=%s&v=%s";
+	String FOURS_API_URL = "api.foursquare.com";
 
 	public static void main(String[] args) {
 		Logger logger = LoggerFactory.getLogger(FoursquareCheckToken.class);
@@ -45,13 +46,18 @@ public class FoursquareCheckToken extends Oauth2CheckToken implements
 	@Override
 	public String getCheckURL(TokenInfo info) {
 		DateFormat df = new SimpleDateFormat("yyyyMMdd");
-		return String.format(FOURS_CK_URL, info.getAccessToken(),
-				df.format(new Date()));
+		return String.format(FOURS_CK_URL, FOURS_API_URL,
+				info.getAccessToken(), df.format(new Date()));
 	}
 
 	@Override
 	public Verb getCheckUrlVerb() {
 		return Verb.GET;
+	}
+
+	@Override
+	protected String getCheckNetWorkURL() {
+		return FOURS_API_URL;
 	}
 
 }

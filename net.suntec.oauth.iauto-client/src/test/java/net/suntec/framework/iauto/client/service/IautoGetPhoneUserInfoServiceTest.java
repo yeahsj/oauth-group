@@ -25,6 +25,9 @@ public class IautoGetPhoneUserInfoServiceTest extends
 		IautoHeaderDTO headerDTO = new IautoHeaderDTO();
 		headerDTO.setIfVersion(configDTO.getIfVersion());
 		headerDTO.setSessionToken(result.getAccessToken());
+		
+		headerDTO.setSessionToken("<TK>014M5LAURvejUrx/FyzIazlAT36d+IJUpPzjAGGK2mN2YAuqNTHTbaH9I4C951ThHJ");
+		
 		IautoGetPhoneUserInfoService service = new IautoGetPhoneUserInfoService(
 				configDTO, paramDTO, headerDTO);
 		try {

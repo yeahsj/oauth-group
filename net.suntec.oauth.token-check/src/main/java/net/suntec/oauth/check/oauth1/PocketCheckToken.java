@@ -24,23 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PocketCheckToken extends Oauth1CheckToken implements CheckToken {
-	String POCKET_CK_URL = "https://getpocket.com/v3/get";
-
-	public static void main(String[] args) {
-		Logger logger = LoggerFactory.getLogger(PocketCheckToken.class);
-		// http://www.baidu.com/?accessToken=764c7028-499b-82d5-ec5b-27f055&refreshToken=&uid=&clientId=35470-c9c585a13325df779105e30d
-		TokenInfo info = new TokenInfo();
-		info.setAccessToken("764c7028-499b-82d5-ec5b-27f055");
-		info.setSecret("pocket no secret");
-		info.setRefreshToken("");
-		// info.setRefreshToken("LzDVmRwq1jKbXGIAOtFh26wUIQlgATtPhlx646WzxxJ5O");
-		info.setApiKey("35470-c9c585a13325df779105e30d");
-		// info.setSecret("QEVTsW2ym7D0uq9lig71MzxZCPmtESBgktDgn0ajL2bCIWsN0l");
-		info.setUid("");
-		CheckToken ct = new PocketCheckToken();
-		boolean valid = ct.check(info);
-		logger.info("valid : " + valid);
-	}
+	String POCKET_CK_URL = "https://%s/v3/get";
+	String POCKET_API_URL = "getpocket.com";
 
 	@Override
 	public boolean valid(TokenInfo info, String body) {
@@ -54,7 +39,7 @@ public class PocketCheckToken extends Oauth1CheckToken implements CheckToken {
 
 	@Override
 	public String getCheckURL(TokenInfo info) {
-		return POCKET_CK_URL;
+		return String.format(POCKET_CK_URL, POCKET_API_URL);
 		// + "?count=1&consumer_key=" + info.getApiKey() + "access_token=" +
 		// info.getAccessToken();
 	}
@@ -110,4 +95,24 @@ public class PocketCheckToken extends Oauth1CheckToken implements CheckToken {
 		}
 	}
 
+	@Override
+	protected String getCheckNetWorkURL() {
+		return POCKET_API_URL;
+	}
+
+	public static void main(String[] args) {
+		Logger logger = LoggerFactory.getLogger(PocketCheckToken.class);
+		// http://www.baidu.com/?accessToken=764c7028-499b-82d5-ec5b-27f055&refreshToken=&uid=&clientId=35470-c9c585a13325df779105e30d
+		TokenInfo info = new TokenInfo();
+		info.setAccessToken("764c7028-499b-82d5-ec5b-27f055");
+		info.setSecret("pocket no secret");
+		info.setRefreshToken("");
+		// info.setRefreshToken("LzDVmRwq1jKbXGIAOtFh26wUIQlgATtPhlx646WzxxJ5O");
+		info.setApiKey("35470-c9c585a13325df779105e30d");
+		// info.setSecret("QEVTsW2ym7D0uq9lig71MzxZCPmtESBgktDgn0ajL2bCIWsN0l");
+		info.setUid("");
+		CheckToken ct = new PocketCheckToken();
+		boolean valid = ct.check(info);
+		logger.info("valid : " + valid);
+	}
 }

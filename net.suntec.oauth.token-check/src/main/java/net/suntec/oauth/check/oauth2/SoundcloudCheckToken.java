@@ -8,12 +8,14 @@ import org.scribe.model.Verb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SoundcloudCheckToken extends Oauth2CheckToken implements CheckToken {
-	String SOUND_CK_URL = "https://api.soundcloud.com/me.json?oauth_token=%s";
+public class SoundcloudCheckToken extends Oauth2CheckToken implements
+		CheckToken {
+	String SOUND_CK_URL = "https://%s/me.json?oauth_token=%s";
+	String SOUND_API_URL = "api.soundcloud.com";
 
 	public static void main(String[] args) {
 		Logger logger = LoggerFactory.getLogger(SoundcloudCheckToken.class);
-		//http://www.baidu.com/?accessToken=1-108336-98992769-53338e9c46c3d2&refreshToken=&uid=98992769&clientId=c46167bc0cc3552e16c8aa445cc6b817#
+		// http://www.baidu.com/?accessToken=1-108336-98992769-53338e9c46c3d2&refreshToken=&uid=98992769&clientId=c46167bc0cc3552e16c8aa445cc6b817#
 		TokenInfo info = new TokenInfo();
 		info.setAccessToken("1-108336-98992769-53338e9c46c3d2");
 		// info.setRefreshToken("LzDVmRwq1jKbXGIAOtFh26wUIQlgATtPhlx646WzxxJ5O");
@@ -39,12 +41,18 @@ public class SoundcloudCheckToken extends Oauth2CheckToken implements CheckToken
 
 	@Override
 	public String getCheckURL(TokenInfo info) {
-		return String.format(SOUND_CK_URL, info.getAccessToken());
+		return String
+				.format(SOUND_CK_URL, SOUND_API_URL, info.getAccessToken());
 	}
 
 	@Override
 	public Verb getCheckUrlVerb() {
 		return Verb.GET;
+	}
+
+	@Override
+	protected String getCheckNetWorkURL() {
+		return SOUND_API_URL;
 	}
 
 }

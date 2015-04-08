@@ -42,6 +42,7 @@ public abstract class IautoLoginService
 				MD5Processor.getMD5Value(paramDTO.getPassword()));
 		request.addBodyParameter("client_id", paramDTO.getClientId());
 		request.addBodyParameter("client_secret", paramDTO.getClientSercet());
+		request.addBodyParameter("device_no", paramDTO.getDeviceNo());
 	}
 
 	public void login(String loginUrl) {

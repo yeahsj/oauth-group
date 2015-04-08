@@ -18,6 +18,15 @@ public class IautoPhoneLoginParamDTO implements IautoParamDTO {
 	private String grantType = "password";
 	private String username;
 	private String password;
+	private String deviceNo;
+
+	public String getDeviceNo() {
+		return deviceNo;
+	}
+
+	public void setDeviceNo(String deviceNo) {
+		this.deviceNo = deviceNo;
+	}
 
 	public String getClientId() {
 		return clientId;

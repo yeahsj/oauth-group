@@ -26,13 +26,14 @@ public class VineCheckToken extends AbstractCheckToken {
 	// https://api.vineapp.com/users/authenticate
 	static Logger logger = LoggerFactory.getLogger(VineCheckToken.class);
 
-	String VINE_CHECK_URL = "https://api.vineapp.com/users/me";
+	static String VINE_API_URL = "api.vineapp.com";
+	static String VINE_CHECK_URL = "https://%s/users/me";
 
 	@Override
 	public boolean valid(TokenInfo info, String body) {
 		JSONObject res = new JSONObject(body);
 		if (res.has("success")) {
-			boolean sucStr = (boolean) res.get("success");
+			Boolean sucStr = (Boolean) res.get("success");
 			return sucStr;
 		} else {
 			return false;
@@ -40,8 +41,13 @@ public class VineCheckToken extends AbstractCheckToken {
 	}
 
 	@Override
+	protected String getCheckNetWorkURL() {
+		return "api.vineapp.com";
+	}
+
+	@Override
 	public String getCheckURL(TokenInfo info) {
-		return VINE_CHECK_URL;
+		return String.format(VINE_CHECK_URL, VINE_API_URL);
 	}
 
 	@Override

@@ -10,7 +10,8 @@ import org.slf4j.LoggerFactory;
 public class Px500CheckToken extends Oauth1CheckToken implements CheckToken {
 	static Logger logger = LoggerFactory.getLogger(Px500CheckToken.class);
 
-	String PX_CHECK_URL = "https://api.500px.com/v1/users";
+	String PX_CHECK_URL = "https://%s/v1/users";
+	String PX_API_URL = "api.500px.com";
 
 	@Override
 	public boolean valid(TokenInfo info, String body) {
@@ -23,7 +24,7 @@ public class Px500CheckToken extends Oauth1CheckToken implements CheckToken {
 
 	@Override
 	public String getCheckURL(TokenInfo info) {
-		return PX_CHECK_URL;
+		return String.format(PX_CHECK_URL, PX_API_URL);
 	}
 
 	@Override
@@ -42,6 +43,11 @@ public class Px500CheckToken extends Oauth1CheckToken implements CheckToken {
 		CheckToken ct = new Px500CheckToken();
 		boolean valid = ct.check(info);
 		logger.info("valid : " + valid);
+	}
+
+	@Override
+	protected String getCheckNetWorkURL() {
+		return PX_API_URL;
 	}
 
 }

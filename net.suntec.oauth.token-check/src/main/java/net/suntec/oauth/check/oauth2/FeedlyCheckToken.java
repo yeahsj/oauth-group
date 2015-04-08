@@ -9,11 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FeedlyCheckToken extends Oauth2CheckToken implements CheckToken {
-	String FDLY_CK_URL = "https://feedly.com/v3/profile?feedlyToken=%s";
+	String FDLY_CK_URL = "https://%s/v3/profile?feedlyToken=%s";
+	String FDLY_API_URL = "feedly.com";
 
 	public static void main(String[] args) {
 		Logger logger = LoggerFactory.getLogger(FeedlyCheckToken.class);
-		//https://www.baidu.com/?accessToken=AhSekvJ7ImEiOiJTdW50ZWMiLCJlIjoxNDI2ODM3OTUwMjA1LCJpIjoiNTc2MTk1NTgtMTBiNC00ZDY4LTlhMWYtMzhlMTY4OTg3NDg2IiwicCI6NCwidCI6MSwidiI6InByb2R1Y3Rpb24iLCJ3IjoiMjAxNC4yNiIsIngiOiJzdGFuZGFyZCJ9:suntec&refreshToken=AiKdNhx7ImkiOiI1NzYxOTU1OC0xMGI0LTRkNjgtOWExZi0zOGUxNjg5ODc0ODYiLCJ1IjoiMjQ4Njk1Mjc2MyIsImEiOiJTdW50ZWMiLCJwIjo0LCJjIjoxNDI2MjMzMTUwMjA1LCJ2IjoicHJvZHVjdGlvbiIsIm4iOiJlVmI5ZzkyZkQ1YUhIdXA2In0:suntec&uid=57619558-10b4-4d68-9a1f-38e168987486&clientId=suntec
+		// https://www.baidu.com/?accessToken=AhSekvJ7ImEiOiJTdW50ZWMiLCJlIjoxNDI2ODM3OTUwMjA1LCJpIjoiNTc2MTk1NTgtMTBiNC00ZDY4LTlhMWYtMzhlMTY4OTg3NDg2IiwicCI6NCwidCI6MSwidiI6InByb2R1Y3Rpb24iLCJ3IjoiMjAxNC4yNiIsIngiOiJzdGFuZGFyZCJ9:suntec&refreshToken=AiKdNhx7ImkiOiI1NzYxOTU1OC0xMGI0LTRkNjgtOWExZi0zOGUxNjg5ODc0ODYiLCJ1IjoiMjQ4Njk1Mjc2MyIsImEiOiJTdW50ZWMiLCJwIjo0LCJjIjoxNDI2MjMzMTUwMjA1LCJ2IjoicHJvZHVjdGlvbiIsIm4iOiJlVmI5ZzkyZkQ1YUhIdXA2In0:suntec&uid=57619558-10b4-4d68-9a1f-38e168987486&clientId=suntec
 		TokenInfo info = new TokenInfo();
 		info.setAccessToken("AhSekvJ7ImEiOiJTdW50ZWMiLCJlIjoxNDI2ODM3OTUwMjA1LCJpIjoiNTc2MTk1NTgtMTBiNC00ZDY4LTlhMWYtMzhlMTY4OTg3NDg2IiwicCI6NCwidCI6MSwidiI6InByb2R1Y3Rpb24iLCJ3IjoiMjAxNC4yNiIsIngiOiJzdGFuZGFyZCJ9:suntec");
 		// info.setRefreshToken("AiKdNhx7ImkiOiI1NzYxOTU1OC0xMGI0LTRkNjgtOWExZi0zOGUxNjg5ODc0ODYiLCJ1IjoiMjQ4Njk1Mjc2MyIsImEiOiJTdW50ZWMiLCJwIjo0LCJjIjoxNDI2MjMzMTUwMjA1LCJ2IjoicHJvZHVjdGlvbiIsIm4iOiJlVmI5ZzkyZkQ1YUhIdXA2In0:suntec");
@@ -39,12 +40,17 @@ public class FeedlyCheckToken extends Oauth2CheckToken implements CheckToken {
 
 	@Override
 	public String getCheckURL(TokenInfo info) {
-		return String.format(FDLY_CK_URL, info.getAccessToken());
+		return String.format(FDLY_CK_URL, FDLY_API_URL, info.getAccessToken());
 	}
 
 	@Override
 	public Verb getCheckUrlVerb() {
 		return Verb.GET;
+	}
+
+	@Override
+	protected String getCheckNetWorkURL() {
+		return FDLY_API_URL;
 	}
 
 }

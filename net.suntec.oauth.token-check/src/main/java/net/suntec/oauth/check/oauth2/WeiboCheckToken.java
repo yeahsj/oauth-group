@@ -9,7 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WeiboCheckToken extends Oauth2CheckToken implements CheckToken {
-	String WB_CK_URL = "https://api.weibo.com/2/users/show.json?access_token=%s&uid=%s";
+	String WB_CK_URL = "https://%s/2/users/show.json?access_token=%s&uid=%s";
+	String WB_API_URL = "api.weibo.com";
 
 	public static void main(String[] args) {
 		Logger logger = LoggerFactory.getLogger(WeiboCheckToken.class);
@@ -39,12 +40,18 @@ public class WeiboCheckToken extends Oauth2CheckToken implements CheckToken {
 
 	@Override
 	public String getCheckURL(TokenInfo info) {
-		return String.format(WB_CK_URL, info.getAccessToken(), info.getUid());
+		return String.format(WB_CK_URL, WB_API_URL, info.getAccessToken(),
+				info.getUid());
 	}
 
 	@Override
 	public Verb getCheckUrlVerb() {
 		return Verb.GET;
+	}
+
+	@Override
+	protected String getCheckNetWorkURL() {
+		return WB_API_URL;
 	}
 
 }
