@@ -13,6 +13,7 @@ import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
 import org.scribe.model.Verb;
 
+import com.openjava.core.util.StrUtil;
 import com.openjava.core.util.encryption.MD5Processor;
 
 /**
@@ -42,7 +43,9 @@ public abstract class IautoLoginService
 				MD5Processor.getMD5Value(paramDTO.getPassword()));
 		request.addBodyParameter("client_id", paramDTO.getClientId());
 		request.addBodyParameter("client_secret", paramDTO.getClientSercet());
-		request.addBodyParameter("device_no", paramDTO.getDeviceNo());
+		if (StrUtil.isNotEmpty(paramDTO.getDeviceNo())) {
+			request.addBodyParameter("device_no", paramDTO.getDeviceNo());
+		}
 	}
 
 	public void login(String loginUrl) {
