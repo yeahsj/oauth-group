@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>net.suntec.framework</groupId>
 		<artifactId>nsf-parent</artifactId>
-		<version>1.0</version>
+		<version>1.1</version>
 	</parent>
 
 	<groupId>net.suntec.oauth</groupId>
@@ -22,7 +22,7 @@
 		<dependency>
 			<groupId>net.suntec.framework</groupId>
 			<artifactId>nsf-core</artifactId>
-			<version>1.0</version>
+			<version>${nsfversion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.json</groupId>
