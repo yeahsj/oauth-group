@@ -99,12 +99,12 @@ public final class NetWorkUtil {
 			InetSocketAddress endpointSocketAddr = new InetSocketAddress(
 					remoteInetAddr, port);
 			socket.connect(endpointSocketAddr, timeout);
-			System.out.println("SUCCESS - connection established! Local: "
+			logger.info("SUCCESS - connection established! Local: "
 					+ localInetAddr.getHostAddress() + " remote: "
 					+ remoteInetAddr.getHostAddress() + " port" + port);
 			isReachable = true;
 		} catch (IOException e) {
-			System.out.println("FAILRE - CAN not connect! Local: "
+			logger.error("FAILRE - CAN not connect! Local: "
 					+ localInetAddr.getHostAddress() + " remote: "
 					+ remoteInetAddr.getHostAddress() + " port" + port);
 		} finally {

@@ -25,5 +25,5 @@ public class PrintHeaderHandler implements LogFilterHandler {
 			logger.info(name + "=" + value);
 		}
 		logger.info("print header success............................ ");
-	}
+	} 
 }
