@@ -21,7 +21,7 @@
 			<artifactId>openjava-core</artifactId>
 			<version>1.0.0523</version>
 		</dependency>
-		<dependency>
+		<dependency> 
 			<groupId>com.openjava</groupId>
 			<artifactId>openjava-model</artifactId>
 			<version>1.0.0523.1</version>
